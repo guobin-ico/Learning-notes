@@ -1,0 +1,163 @@
+网站流程：
+    客户沟通制动方案——签订合同——预付定金(总额的30%，打死不退)——初稿审核(网页美工制作原型设计图和psd效果图)——
+      前端页面设计，后端功能开发——测试验收——上线培训——后期维护
+11. logo 优化
+    logo 里面 首先放一个 h1 标签 ，目的是为了提权，告诉搜索引擎，这个地方很重要
+    h1里面在放一个连接，可以返回首页的， 给连接一个 大小 和 logo 的背景图片
+    连接 里面要放文字（网站名称），为了搜索引擎收录我们。 但是文字不要显示出来
+    要用 text-indent 移到盒子外面 （text-indent: -9999px) 然后overflow:hidden 淘宝的做法
+    直接给font-size: 0; 就看不到文字了， 京东的做法。
+    最后给 连接一个 title 这样鼠标放到logo 上， 就可以看到提示文字了
+引入网站icon图标：
+    1). 使用ico图标
+      首先把favicon.ico 这个图标放到根目录下。
+
+      再html里面， head 之间 引入 代码。
+
+      2). 制作ico图标
+      我们可以自己做的图片，转换为 ico图标，以便放到我们站点里面。
+      方法步骤：
+      首先把我们想要的切成图片。
+      要把图片转换为 ico 图标，我们借助于第三方转换网站： http://www.bitbug.net/。 比特虫
+
+      总结：
+      代码： <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+网站的三大优化标签：
+    8. 网站优化三大标签
+      SEO是由英文Search Engine Optimization缩写而来， 中文意译为“搜索引擎优化”！
+      常见的搜索引擎，比如百度，谷歌，雅虎，搜狗等等..
+      SEO是指通过对网站进行站内优化、网站结构调整、网站内容建设、网站代码优化等)和站外优化，从而提高网站的关键词排名以及公司产品        的曝光度。 简单的说就是，把产品做好，搜索引擎就会介绍客户来。
+      我们现在阶段主要进行站内优化。网站优化，我们应该要懂。。。
+      
+      1). 网页title 标题
+      title具有不可替代性，是我们的内页第一个重要标签，是搜索引擎了解网页的入口，和对网页主题归属的最佳判断点。
+      
+      标题的长度：Google35个中文，百度28个中文
+      关键字分布：最新出现的词语权重要高
+      关键字词频：主关键字出现3次，辅关键字出现一次
+      
+      建议：
+      首页标题：网站名（产品名）- 网站的介绍
+      例如：
+      品优购-综合网购首选-正品低价、品质保障、配送及时、轻松购物！
+      小米商城 - 小米5s、红米Note 4、小米MIX、小米笔记本官方网站
+      
+      2. Description 网站说明
+      	对于关键词的作用明显降低，但由于很多搜索引擎，仍然大量采用网页的MATA标签中描述部分作为搜索结果的“内容摘要”。 就是简要说明       我们网站的主要做什么的。 我们提倡，Description作为网站的总体业务和主题概括，多采用“我们是…”“我们提供…”“×××网作为…”“电       话：010…”之类语句。
+      	品优购网：
+      	<meta name="description" content="品优购JD.COM-专业的综合网上购物商城,销售家电、数码通讯、电脑、家居百货、服装服饰、        母婴、图书、食品等数万个品牌优质商品.便捷、诚信的服务，为您提供愉悦的网上购物体验!" />
+      	注意点：
+      	描述中出现关键词，与正文内容相关，这部分内容是给人看的，所以要写的很详细，让人感兴趣， 吸引用户点击。
+      	同样遵循简短原则，字符数含空格在内不要超过 120 个汉字。
+      	补充在 title 和 keywords 中未能充分表述的说明.
+      	用英文逗号 关键词1,关键词2
+      	<meta name="description" content="小米商城直营小米公司旗下所有产品，囊括小米手机系列小米MIX、小米Note 2，红米手机系列       红米Note 4、红米4，智能硬件，配件及小米生活周边，同时提供小米客户服务及售后支持。" />
+      3. Keywords 关键字
+      	Keywords是页面关键词，是搜索引擎关注点之一。Keywords应该限制在6～8个关键词左右，电商类网站可以多 少许。
+      	品优购网：
+      	<meta name="Keywords" content="网上购物,网上商城,手机,笔记本,电脑,MP3,CD,VCD,DV,相机,数码,配件,手表,存储卡,品优购" /        >
+      	小米网：
+      	<meta name="keywords" content="小米,小米6,红米Note4,小米MIX,小米商城" />
+      4). 总结
+      	我们的网页要做的优秀，符合搜索引擎的要求，才可以让搜索引擎优先显示我们的网页。
+      	所以我们的网站要做很多的优化， 其中就有这三大标签。
+      	一般情况下，三大标签里面的优化词，都是专门的优化人员写的，我们大概了解一下规范就可以了。
+      	我们的主要任务是，能写出这三大标签， 然后把优化人员给我们的内容，添加到里面。
+PC端初始化标签：
+      /* 把所有标签的内外边距清零 */
+            * {
+                margin: 0;
+                padding: 0
+            }
+
+            /*取消 em 和 i 字体下斜 */
+            em,
+            i {
+                font-style: normal;
+            }
+
+            /* 去掉li的小圆点 */
+            li {
+                list-style: none;
+            }
+
+            img {
+                /* border 0 照顾低版本浏览器 如果 图片包含链接会有边框问题 */
+                border: 0;
+                /* 取消图片底侧有空白缝隙问题 */
+                vertical-align: middle;
+            }
+
+            /* 同意鼠标在button的样式为小手 */
+            button {
+                cursor: pointer;
+            }
+
+            a {
+                color: #666;
+                /* 取消下划线 */
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: #c81623;
+            }
+
+            button,
+            input {
+                font-family: Micosoft YaHei, Heiti SC, Tahoma, arial, Hiragino Sans GB, "\5B8B\4F53";
+            }
+
+            body {
+                /* 字体抗锯齿性 CSS3新特性 */
+                -webkit-font-smoothing: antialiased;
+                background-color: #fff;
+                font: 12px/1.5 Micosoft YaHei, Heiti SC, Tahoma, arial, Hiragino Sans GB, "\5B8B\4F53";
+                color: #666;
+            }
+
+            /* 隐藏元素类 */
+            .hide,
+            .none {
+                display: none;
+            }
+            /* 清楚浮动 */
+            /* 在非IE浏览器（如Firefox）下，当容器的高度为auto，且容器的内容中有浮动（float为left或right）的元素，
+            在这种情况下，容器的高度不能自动伸长以适应内容的高度，使得内容溢出到容器外面而影响（甚至破坏）布局的
+            现象。这个现象叫浮动溢出，为了防止这个现象的出现而进行的CSS处理，就叫CSS清除浮动 */
+            .clearfix:after {
+                visibility: hidden;
+                clear: both;
+                display: block;
+                content: ".";
+                height: 0;
+            }
+
+            .clearfix {
+                *zoom: 1;
+           }
+icomoon字库
+          推荐网站： http://icomoon.io
+          
+          IcoMoon成立于2011年，推出的第一个自定义图标字体生成器，它允许用户选择他们所需要的图标，使它们成一字型。 内容种类繁多，非常          全面，唯一的遗憾是国外服务器，打开网速较慢。
+          阿里icon font字库
+          http://www.iconfont.cn/
+          这个是阿里妈妈M2UX的一个icon font字体图标字库，包含了淘宝图标库和阿里妈妈图标库。可以使用AI制作图标上传生成。 一个字，免          费，免费！！
+          
+          6. 字体引入到HTML
+          得到压缩包之后，我们得知字体图标 本质就是 字体文件。 注意这个压缩包不要删掉，我们后面还有用的。
+          
+          最后一步，是最重要的一步了， 就是字体文件已经有了，我们需要引入到我们页面中。
+          首先把 fonts文件夹放入我们 根目录下 。
+          
+          ##### 2. html标签内里面添加结构
+          <img src="media/222.png" />
+          css <span></span>
+          ##### 3. 在样式里面声明字体： 告诉别人我们自己定义的字体(一定注意字体文件路径的问题)
+          css @font-face { font-family: 'icomoon'; src: url('fonts/icomoon.eot?7kkyc2'); src: url('fonts/icomoon.eot?         7kkyc2#iefix') format('embedded-opentype'), url('fonts/icomoon.ttf?7kkyc2') format('truetype'), url('fonts/         icomoon.woff?7kkyc2') format('woff'), url('fonts/icomoon.svg?7kkyc2#icomoon') format('svg'); font-weight:         normal; font-style: normal; }
+          ##### 4. 给盒子使用字体
+          css span { font-family: "icomoon"; }
+          7. 追加字体图标
+          如果工作中，原来的字体图标不够用了，我们需要添加新的字体图标，但是原来的不能删除，继续使用，此时我们需要这样做
+          把压缩包里面的selection.json 从新上传，然后，选中自己想要新的图标，从新下载压缩包，替换原来文件即可。
+

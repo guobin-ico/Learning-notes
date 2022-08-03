@@ -1,0 +1,80 @@
+HTML5新特性:
+        这些新特性都有兼容性问题，基本是 IE9+ 以上版本的浏览器才支持，如果不考虑兼容性问题，可以大量使用这些新特性。
+    语义化标签:
+        <header> 头部标签
+        <nav> 导航标签
+        <article> 内容标签
+        <section> 定义文档某个区域，块级标签
+        <aside> 侧边栏标签
+        <footer> 尾部标签
+        注意：
+        1.这种语义化标准主要是针对搜索引擎的
+        2.这些新标签页面中可以使用多次
+        3.在IE9中，需要把这些元素转换为块级元素
+        4.移动端喜欢使用这些标签
+        5.HTML5还增加了很多其它标签
+    多媒体标签：
+        1.视频viedeo:
+             <video src="media/mi.mp4"></video>
+        兼容写法
+            由于各个浏览器的支持情况不同，所以我们会有一种兼容性的写法，这种写法了解一下即可
+              <video  controls="controls"  width="300">
+                <source src="move.ogg" type="video/ogg" >
+                <source src="move.mp4" type="video/mp4" >
+                您的浏览器暂不支持 <video> 标签播放视频
+              </video>
+              上面这种写法，浏览器会匹配video标签中的source，如果支持就播放，如果不支持往下匹配，直到没有匹配的格式，就提示文本
+            属性        值            描述
+            autoplay    autoplay      自动播放(谷歌浏览器需添加muted)来解决自动播放问题
+            controls    controls            显示播放控件
+            width       像素值               宽度
+            height      像素值               高度
+            loop        loop                循环播放       
+            preload     auto(预先加载视频)    是否预先加载视频(如果有autoplay,就忽略该属性)
+                        none(不应加载视频)
+            src         url                 视频url地址
+            poster      imgurl              加载等待画面图片
+            muted       muted               静音播放
+            注意：谷歌把自动播放功能给禁用了，解决方法加 muted静音属性
+        2.音频标签- audio
+            <audio src="media/music.mp3"></audio>
+            兼容写法：
+                <audio controls="controls"  >
+                    <source src="happy.mp3" type="audio/mpeg" >
+                    <source src="happy.ogg" type="audio/ogg" >
+                    您的浏览器暂不支持 <audio> 标签。
+                </audio>
+            上面这种写法，浏览器会匹配audio标签中的source，如果支持就播放，如果不支持往下匹配，直到没有匹配的格式，就提示文本
+            属性        值            描述
+            autoplay    autoplay      自动播放(谷歌浏览器需添加muted)来解决
+            controls    controls            显示播放控件，必须写的
+            loop        loop                循环播放       
+            src         url                 视频url地址
+
+    新增的表单元素: <input type="" />
+            新的输入类型：
+                属性值              说明
+                type="email"        用户必须为Email类型
+                type="url"          用户必须为URL类型
+                type="data"         用户必须为日期类型
+                type="time"         用户必须为时间类型
+                type="month"        用户必须为月类型
+                type="week"         用户必须为周类型
+                type="number"       用户必须为数字类型
+                type="tel"          手机号码
+                type="search"       搜索框
+                type="color"        生成一个颜色选择表单
+    HTML5新增的表单属性:
+                属性值         值           说明
+                required      required      内容不能为空，必填
+                placeholder   提示文本      表单提示信息，存在默认值将不显示
+                autofocus     autofocus     自动聚焦
+                autocomplete  off/on        键入过的值显示，需要放入表单内，同时加上name属性，并且提交过
+                multiple      multiple      可多选文件提交，配合提交文件使用
+    opacity: .5;半透明
+    跑马灯：marquee
+        <marquee direction="right">我是跑马灯</marquee>   右边
+        <marquee direction="up">我是跑马灯</marquee>      上下
+        <marquee direction="down">我是跑马灯</marquee>    下上
+        direction：设置滚动方向
+        scroll

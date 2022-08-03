@@ -1,0 +1,5 @@
+VSCode插件
+	Chinese Language Pack for VC code 	（中文）
+	Open in Browser 			（浏览器中打开）
+	Auto Rename Tag 			（自动配对标签）
+	CSS Peek 				（追踪至样式）

@@ -1,0 +1,257 @@
+JavaScript面向对象：
+            两大编程思想：
+                面向过程：
+                    面向过程就是分析解决问题所需要的步骤，然后用函数把这些步骤一步一步实现，使用的时候再一个一个的
+                        依次调用就可以了。
+                面向对象：
+                    是把事物分解成一个个对象，然后由对象之间分工与合作。
+                    面向对象是以对象功能来划分问题，而不是步骤。
+                    在面向对象程序开发思想中，每一个对象都是功能中心，具有明确分工。
+                    面向对象编程具有灵活、代码复用、容易维护和开发的有点，更适合多人合作的大型软件项目。
+                    面向对象的特征：
+                        封装性
+                        继承性
+                        多态性
+                面向过程和面向对象的对比
+                    面向过程：  
+                        优点：性能比面向对象高，适合跟硬件联系很紧密的东西，
+                            了。例如单片机就采用面向过程编程。
+                        缺点：没有面向对象容易维护、易复用、易扩展。
+                    面向对象：  
+                        优点：易维护、易复用、易扩展，由于面向对象有风封装、继承、多态性的特征。
+                            可以设计出低耦合的系统，使系统更加灵活，更加易于维护。
+                        缺点：性能比面向对象过程低、
+                用面向过程的方法写出来的程序是一份蛋炒饭，而用面向对象写出来的程序是一份盖浇饭。
+            ES6中的类和对象：
+                面向对象贴近我们实际生活中，可以使用面向对象描述现实世界事物，但是事物分为具体事物和抽象的事物。
+                手机：抽象的(泛指的)
+                    具体的(特指的)
+                    面向对象编程我们考虑的是有哪些对象，按照面向对象的思维特点不断的创建对象，使用对象做事情。
+                    对象：  
+                        万物皆对象
+                    对象是由属性和方法组成：    
+                        属性：事物的特征，在对象中用属性来表示(常用名词)
+                        方法：事物的行为，在对象中用方法来表示(常用动词)
+                    类class
+                        在ES6中新增加了类的概念，可以使用class关键字声明一个类，之后以这个类来实例化对象。
+                        类抽象了对象的公共部分，它泛指某一大类。
+                        对象待特指某一个，通过类实例化一个具体的对象。
+                面向对象的思维特点：
+                    1.抽取(抽象)对象共用的属性和行为组织(封装)成一个类(模板)
+                    2.对类进行实例化，获取类的对象
+            创建类：
+                    语法：class name {
+                        //class body
+                    }
+                        var xx = new name();
+                    注意：类必须使用new实例化对象
+                constructor()方法是类的构造函数(默认方法),用于传递参数返回实例对象，通过new命令生成对象实例时，
+                    自动调用该方法。如果没有显示定义，类内部会自动给我们创建一个constructor();
+                    案例：
+                        <script>
+                            class Star {
+                                constructor(name, age, sex) {
+                                    this.name = name;
+                                    this.age = age;
+                                    this.sex = sex;
+                                    // this.sing();
+                                    this.btn = document.querySelector('button');
+                                    this.btn.addEventListener('click', () => {
+                                        this.sing();
+                                    })
+                                }
+                                sing(song) {
+                                    console.log(this.name + song);
+                                }
+                            }
+                            var ldh = new Star('刘德华', 19, '男');
+                            ldh.sing('冰雨');
+                            ldh.sing('李香兰');
+                        </script>
+                类和对象三个注意点：
+                    1.在ES6中没有变量提升，所以必须先定义类，才能通过类实例化对象
+                    2.类里面的共有的属性和方法一定要加this使用
+                
+                类的继承:
+                    继承：extends
+                        现实中的继承，比如我们都继承了父亲的姓。
+                        程序中的继承，子类可以继承父类的一些属性和方法。
+                        <script>
+                            class Father {
+                                constructor() {
+                                
+                                }
+                                money() {
+                                    console.log(100);
+                                }
+                            }
+                            class Son extends Father {
+                            
+                            }
+                            var son = new Son;
+                            son.money();
+                        </script>
+                    super关键字：
+                        super关键字用于访问和调用对象父类上的函数。可以调用父类的构造函数，也可以调用父类的普通函数
+                        <script> 
+                            // 类的继承
+                            class Father {
+                                constructor(x, y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+                                sum() {
+                                    console.log(this.x + this.y);
+                                }
+                            }
+                            class Son extends Father {
+                                constructor(x, y) {
+                                    super(x, y);
+                                }
+                            }
+                            var ls2 = new Son(12, 12)
+                            ls2.sum()
+                        </script>
+                    super关键字调用父类普通函数
+                        <script>
+                            class Father {
+                                say() {
+                                    return '我是爸爸'
+                                }
+                            }
+                            class Son extends Father {
+                                say() {
+                                    console.log(super.say() + '儿子');
+                                    //super.say()就是调用父类中的普通函数
+                                }
+                            }
+                            var son = new Son();
+                            son.say();
+                            // 继承中的属性或者方法查找原则:就近原则
+                            // 1.继承中，如果实例化子类输出一个方法，先看子类有没有这个方法，如果有先执行子类的
+                            // 2.继承中,如果子类里面没有,就去查找父类有没有这个方法,如果有,就执行父类的这个方法(就近原则)
+                        </script>
+                    子类想要用自己的也想继承父亲的,super必须在子类this之前
+                        <script>
+                            class Father {
+                                constructor(x, y) {
+                                    this.x = x;
+                                    this.y = y;
+                                }
+                                sum() {
+                                    console.log(this.x + this.y);
+                                }
+                            }
+                            class Son extends Father {
+                                constructor(x, y) {
+                                    // 利用super调用父类的构造函数
+                                    // super必须在子类this之前调用
+                                    super(x, y);
+                                    this.x = x;
+                                    this.y = y;
+                                }
+                                jf() {
+                                    console.log(this.x - this.y);
+                                }
+                            }
+                            var z1 = new Son(5, 4);
+                            z1.jf();
+                            z1.sum();
+                        </script>   
+                构造函数和原型对象:prototype
+                        构造函数对象原型prototype
+                        构造函数通过原型的函数是所有对象所共享的
+                        JavaScript规定,每一个构造函数都有一个prototype属性,指向另一个对象,
+                            注意这个prototype就是一个对象,这个对象的所有属性和方法,都会被构造函数所拥有.
+                        我们可以把那些不变的方法,直接定义在prototype对象上,这样所有对象的实例就可以共享这些方法.
+                        原型的作用就是共享方法
+                        案例:
+                            <script>
+                                function Star(name, age, sex) {
+                                    this.name = name;
+                                    this.age = age;
+                                    this.sex = sex;
+                                }
+                                Star.prototype.sing = function() {
+                                    console.log('唱歌');
+                                }
+                                var ldh = new Star('刘德华', 10, '男');
+                                var zxy = new Star('张学友', 30, '男');
+                                ldh.sing();
+                                zxy.sing();
+                            </script>
+                        一般情况下,我们公共属性定义到构造函数里面,公共的方法我们方放到原型对象身上
+                对象原型_proto_
+                        对象都会有一个属性_prototype_指向构造函数的prototype原型对象,之所以我们对象可以使用构造函数
+                        prorotype原型对象的属性和方法,就是因为对象有_prototype_原型的存在.
+                        _prototype_对象原型和原型对象prototype是等价的
+                原型对象constructor构造函数:
+                        <script>
+                            function Star(name, age, sex) {
+                                this.name = name;
+                                this.sex = sex;
+                                this.age = age;
+                            }
+                            // 很多情况下需要我们手动利用construction这个属性指回原来的构造函数
+                            Star.prototype = {
+                                // 如果我们修改了原来的原型对象,给原型对象赋值的是一个对象,则必须手动的利用constructor,
+                                // 指回原来的构造函数
+                                constructor: Star,
+                                sing: function() {
+                                    console.log('唱歌');
+                                },
+                                moves: function() {
+                                    console.log('演电影');
+                                }
+                            }
+                            var ldh = new Star();
+                            console.log(ldh.__proto__);
+                            console.log(Star.prototype);
+                        </script>
+            原型链:
+                ldh对象实例----------------Star原型对象prototrpw-------------------------------------Object原型对象prototype-------null
+                            ldh.__proto__                       Star原型对象prototype.__proto__          Object原型对象prototype.__proto__
+            call()方法:可改变this1指向问题
+                        <script>
+                            function fn(x, y) {
+                                console.log('我想喝手磨咖啡');
+                                console.log(this);
+                                console.log(x + y);
+                            }
+                            var obj = {
+                                name: 'andy',
+                            }
+                            fn.call(obj, 1, 2);
+                        </script>
+        ES5新增方法：
+            数组新增方法
+                1.迭代(遍历)方法：forEach()、map()、filter()、some()、every();
+                    array.forEach(function(value,index,arr) {
+                    console.log(value);值
+                    console.log(index);索引
+                    console.log(arr);数组
+                    })
+                2.filter()方法创建一个新数组，新数组中的元素是通过检查指定数组中符合条件的所有元素，过滤
+                    主要用于筛选数组
+                            var arr = [12, 66, 4, 88];
+                            var newarr = arr.filter(function(value, index, arr) {
+                                return value >= 20;
+                                 return value % 2 === 0; //偶数
+                            })
+                            console.log(newarr);
+                3.some()就是用于检测数组中的元素是否满足指定条件，通俗点查找数组中是否满足条件的元素
+                    它的返回值是布尔值，如找到该元素就返回true。找不到就返回false
+                            var arr = [12, 23, 34, 45, 56]
+                            var flag = arr.some(function(value, index, arr) {
+                                // return value > 10;
+                                return value > 60;
+                            })
+                            console.log(flag);
+                4.map()
+                5.every()
+            字符串方法
+                1.trim()去除字符串两侧空格
+                    var str = '   erfer    ';
+                    var str1 = str.trim();
+                2.
+            对象方法

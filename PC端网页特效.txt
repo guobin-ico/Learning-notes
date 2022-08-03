@@ -1,0 +1,111 @@
+PC端网页特效：
+        元素偏移量offset系列：
+                offset翻译过来就是偏移量，我们使用offset系列相关属性可以动态的得到该元素的位置(偏移)、大小等。
+                可获得元素距离带有定位父元素的位置
+                可获得元素自身大小(宽度和高度)
+                注意：返回数值不带单位
+            offset系列属性              作用
+            element.offsetParent        返回作为该元素带有定位的父级元素，如父级元素都没有定位则返回body
+            element。offsetTop          返回元素相对带有定位父元素上方的偏移
+            element.offsetLeft          返回元素相对带有定位父元素左边框的偏移
+            element.offsetWidth         返回自身包括padding、边框、内容区的宽度，返回数值不带单位
+            element.offsetHeight        返回自身包括padding、边框、内容取得高度，返回数值不带单位
+        offset与style区别：offset只读属性，style可读写属性
+            offset:
+                可得到任意样式中的样式值
+                系列获得的数值没有值
+                只能获取值不能赋值
+                包含padding+boder+width
+                获取元素大小位置offset更合适
+            style:
+                只能得到行内样式表中样式值
+                style.width获得带有单位字符串
+                style.width不包含padding和boder的值
+                style.width是可读属性，可以获取也可赋值
+                想要更改值用style改变
+        元素可视区client系列：
+            通过client系列的相关属性可以动态的得到该元素边框大小，元素大小等。
+            client系列属性              作用
+            element.clientTop           返回元素上方边框大小
+            element.clientLeft          返回元素左边框的大小
+            element.clientWidth         返回自身padding、内容的宽度，不含边框，返回值不带单位
+            element.clientHeight        返回自身padding、内容的高度，不含边框，返回值不带单位
+        元素滚动scroll系列：
+            scoll翻译过来就是滚动的，我们使用scroll系列的相关属性可以动态的得到该元素的大小，滚动距离等。
+            scoll系列属性                作用
+            element.scrollTop           返回被卷去的上侧距离，返回值不带单位
+            element.scrollLeft          返回被卷去的左侧距离，返回值不带单位
+            element.scrollWidth         返回自身实际距离，不含边框，返回值不带单位
+            element.scrollHeight        返回自身实际高度，不含边框，返回值不带单位
+        页面被卷曲的头部window.pageYOffset,window.pageXOffset,
+        三大系列总结：
+            1.offset系类经常获得元素位置，offsetWidth,offsetHeight
+            2.client经常获取元素大小,clientWidth,clientHeight
+            3.scorll经常用于获取滚动距离,scrollTop,scrollLeft
+            4.页面滚动距离通过window.pageYOffset，window.pageXOffset获得
+        动画原理：
+            核心原理：通过定时器setInterval()不断移动盒子位置
+            缓动动画就是盒子当前的位置 + 固定的值 
+            必须给盒子加定位
+            案例：
+                var div = document.querySelector('div');
+                var timer = setInterval(function() {
+                if (div.offsetLeft == 400) {
+                    clearInterval(timer);
+                }
+                    div.style.left = div.offsetLeft + 1 + 'px';
+                }, 30)
+        动画函数封装：
+
+                <script>
+                    window.addEventListener('load', function() {
+                        var div = document.querySelector('div');
+                        var span = document.querySelector('span');
+                                        第一个表示目标对象，第二个表示目标位置
+                        function animation(ks, js) {
+                            var timer = setInterval(function() {
+                                if (ks.offsetLeft == js) {
+                                    clearInterval(timer);
+                                }
+                                ks.style.left = ks.offsetLeft + 1 + 'px';
+
+                            }, 30)
+                        }
+                        animation(div, 560);
+                        animation(span, 200);
+                    })
+                </script>
+        动画函数封装实现单个效果：
+                <script>
+                    window.addEventListener('load', function() {
+                        var div = document.querySelector('div');
+                        var span = document.querySelector('span');
+                        var btn = document.querySelectorAll('button');
+                        function animate(obj, target) {
+                            clearInterval(obj.timer)
+                            obj.timer = setInterval(function() {
+                                if (obj.offsetLeft >= target) {
+                                    clearInterval(timer)
+                                }
+                                obj.style.left = obj.offsetLeft + 1 + 'px';
+                            }, 10)
+                        }
+                        btn[0].addEventListener('click', function() {
+                            animate(div, 400);
+                        })
+                        btn[1].addEventListener('click', function() {
+                            animate(span, 800);
+                        })
+                    })
+                </script>
+        缓动动画效果原理：动画里面必须加定位
+                缓动动画就是让元素运动速度有所变化，最常见的是让速度慢慢停下来
+                思路：让盒子移动距离慢慢变小，速度就会慢慢落下来
+                核心算法：(目标值-现在的位置) / 10做为每次移动的距离步长
+                缓动动画就是 (目标值 - 现在的位置)  /10
+        缓动动画添加回调函数
+                回调函数原理：函数作为一个参数，将这个函数作为参数传到另一个函数里面，当那个函数执行完之后，
+                    在执行传进去的这个函数，这个过程就叫做回调。
+
+
+    

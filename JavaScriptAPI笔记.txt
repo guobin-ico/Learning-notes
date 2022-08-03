@@ -1,0 +1,498 @@
+Web APIS简介：
+            Web APIs和JS基础关联性
+                    JS组成：
+                      JavaScript组成：（ECMAScript(基本语法)——DOM(页面文档对象类型)——BOM(浏览器对象，模型)）
+                      接下来学DOM和BOM统称Web APIs，主要学习页面交互效果
+                    总结：js基础学习ECMAJavaScript基础语法为后面做铺垫，web APIs是js的应用，
+                          大量使用js基础语法做交互效果
+                (1).API:是我们程序员提供的一个接口，帮我们实现某种功能，我们会用就可以了，不必纠结内部如何使用。
+                简单理解：API是给程序员提供的一种工具，以便能更轻松的实现想要完成的功能。
+                (2).Web API：是浏览器提供的一套操作浏览器功能和页面元素的API(BOM和DOM)。
+            DOM简介：文档对象模型，是W3C组织推荐的处理可扩展标记语言(HTML或者XML)的标准编程接口。
+                W3C已经定义了一系列的DOM接口，通过这些DOM接口可以改变网页的内容，结构和样式。
+            DOM树：
+                文档：一个页面就是一个文档，DOM中使用document表示
+                元素：页面中的所有标签都是元素，DOM中使用element表示
+                节点：网页中的所有内容都是节点(标签、属性、文本、注释等)，DOM中使用node表示
+            DOM把以上内容都看做是对象
+            获取元素：
+                  console.dir()可以显示一个对象所有的属性和方法。
+                  DOM在我们开发中实际开发中主要用来操作元素
+                  获取页面中的元素可以使用以下几种方式：
+                        根据ID获取
+                              document.getElementById('');
+                        根据标签名获取
+                                      // 返回的是，获取过来元素对象的集合，以伪元素，以伪数组的形式存储
+                              var li = document.getElementsByTagName('li');
+                        通过HTML5新增的方法获取
+                              //根据类名获得某些元素集合
+                              1.document.getElementsByClassName('box');
+                              // querySelecter 返回指定选择器的第一个元素对象
+                              2.var firstbox = document.querySelector('.box');
+                              console.log(firstbox);
+                              3.querySelecterAll('.box') 返回指定选择器的所有元素对象
+                              var boxs = document.querySelectorAll('.box');
+                        特殊元素获取
+                              //1.获取body
+                                    var bodyEle = document.body
+                                    console.log(bodyEle);
+                                    console.dir(bodyEle);
+                              // 2.获取html
+                                    var htmlEle = document.documentElement;
+                                    console.log(htmlEle);
+            事件三要素：
+                        事件概述：JavaScript使我们有能力创建动态页面，而事件是可以被JavaScript侦测到的行为。
+                        简单理解：触发—-----响应机制
+                         1.事件有三部分组成，事件源  事件类型  事件处理程序  我们称之为事件三要素
+                         案例：
+                              <body>
+                                  <button id="btn">唐伯虎</button>
+                                  <script>
+                                      // （1）事件源   事件被触发的对象 谁
+                                      // （1）获得事件源
+                                      var btn = document.getElementById('btn');
+                                      // （2）事件类型，如何触发什么事件，比如事件点击（onclick）
+                                      //（3） 事件处理程序，通过函数赋值的方式 完成
+                                      btn.onclick = function() {
+                                          alert('点秋香');
+                                      }
+                                  </script>
+                              </body>                             
+                        执行事件的步骤：
+                              1.获取事件源
+                              2.注册事件
+                              3.添加事件处理程序（采取函数赋值形式）
+                        操作元素-修改元素内容：
+                              DOM操作可以改变网页内容、结构和样式，我们可以利用DOM操作元素来改变元素里面的内容，
+                              属性等。下面的全是属性：
+                              (1).改变元素的内容：
+                                    element.innerText(不识别html标签)
+                                    从起始位置到终止位置内容，但它去除html标签，同时空格和换行也会去掉     
+                                    element.innerHTML (可识别html标签)     
+                                    起始位置到终止位置的全部内容，包括html标签，同时保留空格和换行
+                              (2).常用元素的属性：
+                                    1.innerText、innerHTML改变元素内容
+                                    2.src、href
+                                    3.id、alt、title
+                        表单元素的属性操作：
+                              利用DOM可以操作如下表单元素属性：
+                                    type、value、checked、selected、disabled(被禁用了)
+                        样式属性操作：
+                              我们可以通过js修改元素的大小、颜色、位置等。
+                              1.element.style         行内样式操作
+                              2.element.className     类名样式操作
+                        注意：如果样式多，可以采取操作类名方式更改元素样式
+                              className来操作元素类名属性
+                              会直接更改元素的类名，会覆盖原先的类名
+            自定义属性的操作：
+                        1.获取属性值
+                              element.属性          获取属性值    内置属性,也可设置内置属性
+                              element.getAttribute('属性');       自定义属性
+                              element.setAttribute('属性','要改的值');       设置自定义属性
+                              element.removeAttribute('属性');    移除属性
+                        2.H5自定义属性：
+                              自定义属性目的：是为了保存并使用数据，有些数据可以保存到页面中而不用保存到数据库中。
+                              (1).设置H5自定义属性
+                                    H5规定自定义属性data开头做为属性名并且赋值。
+                                    比如:<div date-index=" 1 "></div>
+                              (2).获取H5自定义属性：
+                                    1.兼容性获取      element.getAttribute('data-index');
+                                    2.H5新增          element.dataset.index 或者element.dataset['index']
+                                    console.log(div.dataset);dataset是一个集合里面存放了所有以data开头的自定义属性
+                                    如果自定义属性里面有多个-链接的单词，我们获取的时候采取驼峰命名法，案例：
+                                    <div data-list-name="andy"></div>
+                                    console.log('div.dataset['listName']')
+            节点操作：
+                  利用节点层级关系获取元素
+                        利用父子兄节点关系获取元素
+                  节点概述：
+                        节点至少拥有noteType（节点类型）、nodeName(节点名称)和nodeValue(节点值)这三个基本属性
+                        实际开发中，节点操作主要操作的是元素节点。
+                        元素节点 nodeType 为 1
+                        属性节点 nodeType 为 2
+                        文本节点 nodeType 为 3 （文本节点包含、空格、换行等）
+                  节点层级：
+                        利用DOM树可以把节点划分位不同的层级关系，常见的是父子兄级关系。
+                  1.父节点：
+                        (1).parentNode;
+                        返回最近的节点
+                        指定的节点没有父节点则返回null
+                  2.子节点
+                        (1).childrenNode;不推荐使用
+                        所有的子节点，包含元素节点，文本节点等等
+                        (2).parentNode.children(非标准)
+                              是一个只读属性，返回所有的子元素节点。只返回子元素节点，其余节点不返回
+                        (3).parentNode.firstChildren:返回第一个子节点
+                        (4).parentNode.lastChildren:返回第最后一个节点
+                        (5).firstElementChild    返回第一个子元素节点，ie9以上
+                        (6).lasetElementChild    返回最后一个子元素节点，ie9以上
+                        (7).parentNode.children[0];返回第一个子元素节点
+                        (8).parentNode.children[ol.children.length-1];返回最后一个子元素节点
+                  3.兄弟节点：
+                        nexxtSibing 下一个兄弟节点，包含元素节点或者文本节点等等。
+                        previousSibling返回当前元素上一个兄弟节点，找不到返回null，同样也是包含所有节点，ie9以上支持
+                        nextElementSibling  得到是当前元素兄弟节点，找不到返回null
+                        previousElementSibling 返回当前元素上一个兄弟节点，找不到返回null.ie9以上支持
+                  4.创建节点：
+                        document.createElement('tagName');根据我们的需求动态生成的，所以我们称为动态创建元素节点。
+                        常见的鼠标事件：
+                  5.添加节点：
+                        node.appendChildren(child);将一个节点添加到指定父节点的列表末尾。相当于css里after伪元素,数组push
+                        node.insertBefor(child,ul.children[0]);将一个节点添加到父节点的指定节点的前面。相当于css里befor伪元素
+                  6.删除节点：
+                        node.removeChild(child);方法从Dom中删除一个子节点，返回删除的节点
+                  7.复制节点：(克隆节点)
+                        node.cloneNode();
+                        node.cloneNode();方法返回调用该方法的节点的一个副本，也称为克隆节点/拷贝节点
+                        如果括号参数为空或者为false,则是浅拷贝，即只复制本身标签，不复制里面内容
+                        如果括号参数为空或者为true,则是深拷贝，复制标签也复制内容
+                              onclick                 鼠标点击触发
+                              onmouseover             鼠标经过触发
+                              onmouseout              鼠标离开触发
+                              onfocus                 获得鼠标焦点触发
+                              onblur                  失去鼠标焦点触发
+                              onmousemove             鼠标移动触发               
+                              onmouseup               鼠标弹起触发
+                              onmousedown              鼠标按下触发
+                              mouseenter对应mouseleave：和mouseover同等功能，不同的是无冒泡
+                                    
+                        contextmenu：禁用右键菜单
+                        1.禁止鼠标右键菜单：contextmenu主要控制应该何时显示上下文菜单，主要用于程序员取消默认上下文菜单
+                        document.addEventListener('contextmenu',function(e){
+                              e.preventDefault();
+                        });
+                        2.禁止鼠标右键(selectstart 开始选中)
+                              document.addEventListener('selectstart',function(e){
+                                    e.preventDefault();
+                              })
+      事件高级：
+                  给元素添加事件，称为注册事件或者绑定事件。
+                  注册事件的两种方式：
+                        1.传统注册方式
+                              利用on开头的事件onclick
+                              btn.onclick = function() {};
+                        2.事件监听注册事件
+                              eventTarget.addEventListener(type,listener[,useCaptyure])
+                        type:事件类型字符串，比如click、mouseover、注意这里不要带on
+                        listener：事件处理函数，事件发生时，会调用该监听函数
+                        useCaptyure：可选参数，是一个布尔值，默认false。学完DOM事件后，进一步学习
+                        案例：      
+                              <body>
+                                 <button>传统注册事件</button>
+                                 <button>事件监听事件</button>
+                                 <script>
+                                     var btns = document.querySelectorAll('button');
+                                     btns[1].addEventListener('click',function() {
+                                         alert('哈哈哈');
+                                     })
+                                 </script>
+                              </body>
+                        特点：里面的事件类型是字符串，必定加引号，而且不带on
+                              同一元素，同一个事件可以添加多个侦听器(事件处理程序)
+            删除事件：
+                  删除事件的方式：
+                        1.传统注册方式删除事件
+                              div.onclick = null;
+                        2.新方法注册删除事件
+                              divs[1].addEventListener('click',fn) //里面的fn 不需要调用加小括号
+                                function fn() {
+                                    alert(222);
+                                    divs[1].removeEventListener('click',fn);
+                                }
+            DOM事件流：
+                  事件流描述的是从页面中接收事件的顺序。
+                  事件发生时会在元素节点之间按照待定的顺序传播，这个传播过程即DOM事件流。
+                  DOM事件流分为3个阶段：
+                  1.捕获阶段
+                  2.当前目标阶段
+                  3.冒泡阶段
+            事件流代码验证：捕获或冒泡
+                  注意：
+                        1.js代码只能执行捕获或者冒泡其中的一个阶段
+                        2.onclick 和 attachEvent 只能得到冒泡阶段
+                        3.addEventListener();第三个参数如果是true，表示在事件捕获阶段调用事件处理程序，如果false
+                        （不写默认就是false）,表示在事件冒泡阶段调用事件处理程序。
+                  有些事件流没有冒泡，比如onblue,onfocus,onmouseenter,onmouseleave,
+                  事件冒泡有时候会带来麻烦，有时候又会帮助很巧妙的做某些事件，后面讲解
+            事件对象：
+                  <body>
+                      <div>123</div>
+                      <script>
+                          var div = document.querySelector('div');
+                          div.onclick = function(event) {
+                              console.log(event);
+                              console.log(window.event);
+                          }
+                          div.addEventListener('click',function(e) {
+                              e = e || window.event;  //ie678兼容性处理
+                              console.log(e);
+                          })
+                          // 1.event 就是一个事件对象，写到我们侦听函数里，小括号里面当形参来看
+                          //2.事件对象只有有了事件才会存在，它是系统自动创建的，不需要我们传递参数
+                          // 3.事件对象是我们事件的一系列相关数据的集合，跟事件相关的，
+                          //      比如鼠标点击里面包含了鼠标的相关信息，鼠标坐标等，
+                              // 如果键盘事件里面就包含键盘事件的信息，比如判断用户按下了哪个键。
+                          // 4.这个事件对象我们可以自己命名，比如event、evt、e
+                          // 5.事件对象也有兼容问题， ie678通过window.event
+                          // event对象代表事件状态，比如键盘按键的事件状态，鼠标的位置，鼠标按钮的状态。
+                      </script>
+                  </body>
+            事件对象的常见属性和方法：
+                        // e.target返回的是触发事件的对象
+                        // this指向绑定事件
+                  事件对象属性方法              说明
+                  e.target                返回触发事件的对像，标准
+                  e.srcElement            返回触发事件的对象，非标准
+                  e.type                  返回事件的类型，比如click.mouseover,不带on
+                  e.returnValue           阻止默认事件，非标准ie6-8,比如不让链接跳转
+                  e.preventDefault()      该方法阻止默认事件（默认行为）标准 比如不让链接跳转
+                  e.cancelBubble = true   该属性阻止冒泡，非标准，ie6-8使用
+                  e.stopPropagation()     阻止冒泡，标准
+                  return false;           阻止默认行为，没有兼容问题，return后代码不执行，传统注册好使，最新不好使
+            事件委托(代理、委派)：
+                  事件冒泡本身的特征，会带来的坏处，也会带来的好处。需要我们灵活掌握，生活中如下场景。
+                        学生领取快递
+                  事件委托：
+                        事件委托也称为事件代理，在jQuery里面称为事件委派。
+                  事件委托的原理：
+                        给父节点添加侦听器，利用事件冒泡影响每一个子节点
+                        然后利用冒泡影响设置每个子节点上。比如ul注册点击事件，利用e.target点击li得到li里面的
+                  事件委托的作用：
+                        只操作了一次DOM，提高程序性能
+            鼠标事件对象：
+                  MouseEvent和键盘事件对象KeyboarEvent。
+                  鼠标事件对象            说明
+                  e.clientX               返回鼠标相对应浏览器窗口可视区的x坐标
+                  e.clientY               返回鼠标相对应浏览器窗口可视区的y坐标
+                  e.pageX                 返回鼠标相对于文档页面的Y坐标 IE9+ 支持
+                  e.pageY                 返回鼠标相对于文档页面的X坐标 IE9+ 支持
+                  e.screenX               返回鼠标相对应电脑屏幕的X对应
+                  e.screenY               返回鼠标相对应电脑屏幕的Y对应
+            常用的键盘事件:
+                  键盘事件          触发条件
+                  onkeyup          某个按键松开时触发
+                  onkeydown        某个键盘按键被按下时触发
+                  onkeypress       某个键盘按键被按下时触发(但不能识别功能键，如ctrl，shift箭头等)
+                  这三个都写进去的话，是有顺序的，先执行keydown——keypress——keyup
+                  使用传统事件需要加on，使用最新事件不加on
+            键盘事件对象：
+                  键盘事件对象属性              说明
+                  e.keyCode                 返回该键的ASCII值
+                  1.我们的keyup 和 keydown事件不区分字母大小写 a 和 A 得到的都是65
+                  2.我们的keypress事件区分字母大小写 a 和 A 得到的都是65
+            注意：keydown和keypress在文本框里面的特点：他们两个事件触发的时候，文字还没有落入文本框中。
+BOM浏览器对象模型：
+      BOM概述：
+            浏览器对象模型，它提供了独立于内容而与浏览器窗口进行交互的对象，其核心对象是window。
+            BOM由一系列相关的对象构成，并且每个对象都提供了很多方法与属性。
+            BOM缺乏标准，JavaScript语法的标准组织是ECMA，DOM的标准化组织是W3C，BOM最初netscape浏览器的标准的一部分。
+            把浏览器当做一个对象来看待，BOM的顶级对象是window，BOM学习的是浏览器窗口交互的一些对象，BOM是浏览器厂商在
+                  各自浏览器上定义的，兼容性比较差。
+            BOM的构成：
+                  BOM比DOM更大，它包含DOM
+                  window对象是浏览器的顶级对象，它具有双重角色。
+                        1.它是js访问浏览器窗口的一个接口。
+                        2.它是一个全局对象，定义在全局作用域中的变量、函数都会变成windown对象的属性和方法.
+                        在调用的时候可以省略window,前面学习的对话框都属于window对象方法，如alert();prompt();等。
+                        案例：
+                              <script>
+                                  var num = 10;
+                                  console.log(num);
+                                  console.log(window.num);
+                              </script>
+                              <script>
+                                    function fn() {
+                                        console.log(12);
+                                    }
+                                    fn();
+                                    window.fn();
+                              </script>
+                                    alert(11);
+                                    window.alert(11);
+                              </script>
+                              注意：window下的一个特殊属性window.name
+      窗口加载事件：
+            1. window.onload = function() {};
+                  或者
+            2.提倡window.addEventListener('load',function() {});
+            window.onload是窗口(页面)加载事件，当文档内容完全加载完成会触发该事件(包括图像、脚本文件、css文件等)，
+                  就调用的处理函数。
+            3.document.addEventListener('DOMContentLoaded',function(){});
+                  DOMContentLoaded 事件触发时，仅当DOM加载完成，不包括样式表，图片，flash等等。ie9以上支持
+                  如果页面加载很多的话，从用户访问onload触发可能需要较长的时间，交互效果就不能实现，必然影响用户体验，
+                  此时用户DOMContentLoaded事件比较合适。
+            注意：
+                  (1).有了window.onload就可以把JS代码写到页面元素的上方，因为onload是页面内容全部加载完毕，再去执行处理函数。
+                  (2).window.onload传统注册事件方式只能写一次，如果多个，会以最后一个window.onload为准。
+                  (3).如果使用addEventListener则没有限制。
+      调整窗口大小事件：
+            window.onresize = function();
+            window.addEventListener('resize',function() {});
+            window.onresize 是调整窗口大小加载事件，当触发时就调用的处理函数
+            注意：      
+                  1.只要窗口大小发生像素变化，就会触发这个事件
+                  2.我们经常利用这个事件完成响应式布局，window.innerWidth当前屏幕的宽度innerHeight高度
+      定时器：
+            1.两种定时器：
+                  window对象给我们提供了2个非常好用的方法定时器。
+                  (1).setTimeout():
+                        window.setTimeout(调用函数,[延迟的毫秒数]);
+                        setTimeout(function() {},5000);最后位毫秒数可以省略，省略为0
+                  注意：
+                        1.setTimeout()方法用于设置一个定时器，该定时器在定时器到期后执行调用函数。
+                        2.window在调用的时候可以省略，
+                        3.这个调用函数可以直接写函数，还可以写函数名    
+                        4.页面中可能有很多的定时器，我们经常给定时器加标识符 （就是给每个定时器起名字）
+                        var time1 = setTimeout(callbakc,2000);
+                        var time2 = setTimeout(callbakc,5000);
+                        setTimeout()这个调用函数我们也称为回调函数callback,因为普通函数按照代码顺序直接调用，
+                              而这个函数，需要等待时间，时间到了才会调用这个函数，因此我们称为回调函数。
+                              也就是再回头调用这个函数
+                  (2).setInteval():
+                                          window.setInteval(调用函数,[延迟的毫秒数]);
+                        setsetInteval(function() {},5000);最后位毫秒数可以省略，省略为0
+                  注意：
+                        1.setsetInteval()方法用于设置一个定时器，该定时器在定时器到期后执行调用函数。
+                        2.window在调用的时候可以省略，
+                        3.这个调用函数可以直接写函数，还可以写函数名    
+                        4.页面中可能有很多的定时器，我们经常给定时器加标识符 （就是给每个定时器起名字）
+                        var time1 = setsetInteval(callbakc,2000);
+                        var time2 = setsetInteval(callbakc,5000);
+                        setsetInteval()这个调用函数我们也称为回调函数callback,因为普通函数按照代码顺序直接调用，
+                              而这个函数，需要等待时间，时间到了才会调用这个函数，因此我们称为回调函数。
+                              也就是再回头调用这个函数
+                  (3).清除定时器：
+                        window.clearTimeout(定时器的名字);
+                        window.clearInteval(定时器的名字);
+                  案例1：
+                        自动关闭
+                              <script>
+                                    var img = document.querySelector('img');
+                                    setTimeout(() => {
+                                          img.style.display = 'none'
+                                    }, 3000);
+                              </script>
+                  案例2：
+                        倒计时：
+                              <script>
+                                  var tian = document.querySelector('.t');
+                                  var hourss = document.querySelector('.h');
+                                  var fen = document.querySelector('.m');
+                                  var miao = document.querySelector('.seac');
+                                  function getTime() {
+                                      var dq = +new Date();
+                                      var inp = +new Date('2022-6-7 09:00:00');
+                                      var jl = parseInt(inp - dq) / 1000;
+                                      var t = parseInt(jl / 60 / 60 / 24);
+                                      t = t < 10? '0' + t : t;
+                                      tian.innerHTML = t;
+                                      var hours = parseInt(jl / 60 /60 % 24);
+                                      hours = hours < 10? '0' + hours : hours;
+                                      hourss.innerHTML = hours;
+                                      var mines = parseInt(jl / 60 % 60);
+                                      mines = mines < 10? '0' + mines : mines;
+                                      fen.innerHTML = mines;
+                                      var senc = parseInt(jl % 60);
+                                      senc = senc < 10? '0' + senc : senc;
+                                      miao.innerHTML = senc;
+                                  }
+                                  getTime()
+                                  setInterval(() => {
+                                      getTime()
+                                  }, 1000);
+                              </script>
+                  案例3：发送短信
+                        <script>
+                            window.addEventListener('load',function() {
+                                var btn = document.querySelector('button');
+                                var num = 5;
+                                var timer = null;
+                                btn.addEventListener('click',function() {
+                                    btn.disabled = true;
+                                  timer =  setInterval(() => {
+                                        if(num == 0) {
+                                            btn.disabled = false;
+                                            btn.innerHTML = '发送';
+                                            clearInterval(timer);
+                                            num = 5;
+                                        } else {
+                                            btn.innerHTML = '还剩下'+num+'秒';
+                                            num--;
+                                        }
+                                    }, 1000);
+                                })
+                            })
+                        </script>
+            this指向问题：
+                  this的指向在函数定义的时候确定不了的，只有函数执行的时候才能确定this到底指向谁，一般情况下this的
+                        最终指向的是哪个调用它的对象。
+            JS执行机制：同步和异步
+                  JavaScript语言一大特点就是单线程，也就是说，同一时间只能做一件事。
+                  比如我们对某个DOM元素进行添加和删除操作，不能同时进行添加和删除操作，应该进行添加之后在删除。
+                  单线程意味着，所有任务需要排队，前一个任务结束，才会执行后一个任务。这样导致的问题：如果JS执行
+                        时间过长，这样就会造成页面渲染加载阻塞的感觉。
+                  同步和异步：
+                        为了解决这个问题，利用多核CPU的计算能力，HTML5提出webWorker标准，允许JavaScript脚本创建
+                        多个线程。于是js中出现了同步和异步。
+                        同步：前一个任务结束之后在执行后面的任务，根据任务的执行顺序执行。
+                        异步：可以同时处理多个任务
+                  同步任务：
+                        同步任务都在主线程上执行，形成一个执行栈
+                  异步任务：
+                        js异步是通过回调函数实现的。放在任务队列中（消息队列）
+                        异步任务有以下三种类型：
+                              1.普通事件，如click，resize,
+                              2.资源加载,load,error
+                              3.两个定时器，setTimeout、setInterval
+                  执行机制顺序：
+                        1.先执行执行栈中的同步任务
+                        2.异步任务(回调函数)放入到任务队列中。
+                        3.一旦执行栈中所有同步任务执行完毕，系统就会次序读取任务队列中的异步任务，于是被读取的异步
+                              任务结束等待状态，进入执行栈，开始执行。
+                  由于主线程不断的重复获得任务，执行任务、在获取任务、在执行，所以这种机制被称为事件循环。
+      location对象：
+                  window对象给我们提供了一个location属性，用于获取或设置窗体的URL，并且可以用于解析URL，
+                        因为这个属性返回的是一个对象，所以我们将这个属性也称为location对象。
+                  URL：
+                        统一资源定位符，是互联网标准资源的地址，互联网上的每个文件都有一个唯一的url,它包含的信息指出
+                        文件的位置以及浏览器应该怎么处理它。
+                        URL的一般语法格式为：
+                              protocol://host[:port]/path/[?query]#fragment
+                              http://www.itcast.cn/index.html?name=andy&age=18#link
+                              组成              说明
+                              protocol          通信协议，常用http,ftp,maito等
+                              host              主机(域名) wwww.baidu.com
+                              port              端口可选，省略时使用方案的默认端口，如http的默认端口为80
+                              path              路径由零或多个'/'符号隔开的字符字符串，一般用来表示主机上的一个目录或文件地址
+                              query             参数，以键值对的形式，通过&符号分隔出来
+                              fragment          片段 #后面内容常见于链接锚点
+                  location对象的属性:
+                        location对象            返回值
+                        location.href           获取或者设置整个URL
+                        location.host           返回主机(域名) wwww.baidu.com
+                        location.port           返回端口号，如果未写返回空字符串
+                        location.pathname       返回路径
+                        location.search         返回参数
+                        location.hash           返回片段，#后面内容，常见于链接锚点
+                  location对象的方法：
+                        location对象方法        返回值
+                        location.assign();         跟href一样，可以跳转页面，(也称位重定向页面) ,可记录历史可回退         
+                        location.replace();      替换当前页面，因为不记录历史，所以不可实现后退页面
+                        location.reload();      重新加载页面， 相当于刷新按钮或者f5如果参数为true强制刷新ctrl+ f5
+                  navigator对象:(实现手机浏览器等终端跳转)
+                        navigator对象包含有关浏览器的信息，它有很多属性，我们最常用的时userAgent,该属性可以返回由客户机发送
+                        服务器的user-agent头部的值。
+                        下面前端代码可以判断用户哪个终端打开页面，实现跳转。
+
+                        if((navigator.userAgent.match(/(phone|pad|pod|iPhone|iPod|ios|iPad|Android|
+                        Mobile|BlackBerry|IEMobile|MQQBrowser|JUC|Fennec|wOSBrowser|BrowserNG|WebOS
+                        |Symbian|Windows Phone)/i))) {
+                         window.location.href = ""; //手机
+                        } else {
+                         window.location.href = ""; //电脑
+                        }
+                  history对象方法：
+                        back()可以后退功能
+                        forward()前进功能
+                        go(参数)    前进后退功能，参数为1为前进1个页面，如果-1则后退一个页面
+                  手动调用点击调用事件
