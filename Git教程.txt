@@ -126,6 +126,8 @@ Git
 			2.合并
 			git merge 分支名字
 			git merge common
+		10.6提交远程仓库
+			git push --set-upstream origin <创建的分支名称>    	提交远程仓库分支
 	11.冲突
 		11.1什么是冲突
 			冲突一般是指同一位置的代码，两种版本的仓库合并时，
@@ -193,4 +195,13 @@ Github:
 			3.git commit -m ''	
 			4.git push origin master
 	4.第三方协作（合作）
-		链接发给第三方，第三方登录使用所谓的fork出对应的库
+		链接发给第三方，第三方登录使用所谓的fork出对应的库	
+	5.git clone 项目所有分支方法
+		1.只克隆单分支（非master）：
+ 			git clone -b 分支名 https://xxx.git
+		2.克隆所有分支（多分支）
+			cd project   //切换指定目录
+			git clone https://......	  //克隆项目（默认master）
+			cd xxxx	//切换到项目目录
+			git branch -a  //列出所有分支名名称
+			git checkout -b template origin/template(切换到指定分支)
